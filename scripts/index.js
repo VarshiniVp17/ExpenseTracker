@@ -1,3 +1,6 @@
+//Will Implement once JS DOM is Loaded
+const expenseTableBody = document.querySelector("tbody");
+
 document.addEventListener("DOMContentLoaded", () => {
   const expense_form = document.getElementById("expense-form");
   const amount = document.getElementById("amount").value;
@@ -18,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       date,
     };
 
+    console.log(expense);
     saveExpense(expense);
 
     expense_form.reset();
@@ -41,9 +45,11 @@ function loadExpenses() {
 }
 
 function addExpenseToTable(expense) {
-  let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
-  expenses.filter((expense) => {
-    expense.id !== expense.id;
-  });
-  localStorage.setItem("expenses", JSON.stringify(expenses));
+  const row = document.createElement("tr");
+  row.innerHTML = `<td>${expense.amount}</td>
+  <td>${expense.category}</td>
+  <td>${expense.date}</td>
+  <td><button class="delete">Delete</button></td>`;
+
+  expenseTableBody.appendChild(row);
 }
